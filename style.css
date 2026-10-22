@@ -59,7 +59,9 @@ a:hover { color: var(--deep); }
 
 /* Hero banner */
 .hero {
-  background: var(--deep) url("banner.svg") center / cover no-repeat;
+  background:
+    linear-gradient(rgba(14, 39, 64, 0.55), rgba(14, 39, 64, 0.55)),
+    url("banner.png") center / cover no-repeat;
   color: #fff;
 }
 .hero .inner {
