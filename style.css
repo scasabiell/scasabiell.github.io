@@ -61,7 +61,7 @@ a:hover { color: var(--deep); }
 .hero {
   background:
     linear-gradient(rgba(14, 39, 64, 0.55), rgba(14, 39, 64, 0.55)),
-    url("banner.png") center / cover no-repeat;
+    url("banner_2.png") center / cover no-repeat;
   color: #fff;
 }
 .hero .inner {
