@@ -159,3 +159,4 @@ footer a { color: var(--muted); }
   .hero .inner { padding: 64px 24px 32px; }
   .hero.big .inner { padding: 100px 24px 44px; }
 }
+.nav li:last-child { display: none; }
