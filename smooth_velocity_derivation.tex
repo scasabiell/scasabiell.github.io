@@ -1,0 +1,1021 @@
+\documentclass[11pt]{article}
+\usepackage[a4paper,margin=24mm]{geometry}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{amsmath,amssymb,mathtools,amsthm,bm}
+\usepackage{microtype}
+\usepackage[hidelinks]{hyperref}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\bx}{\bm{x}}
+\newcommand{\by}{\bm{y}}
+\newcommand{\bz}{\bm{z}}
+\newcommand{\bk}{\bm{k}}
+\newcommand{\bzeta}{\boldsymbol{\zeta}}
+\newcommand{\bkappa}{\boldsymbol{\kappa}}
+\newcommand{\dd}{\,\mathrm{d}}
+\newtheorem{proposition}{Proposition}
+\allowdisplaybreaks[1]
+\setlength{\emergencystretch}{2em}
+
+\title{Background velocity estimation by focusing optimization\\
+for a smooth layered medium}
+\author{}
+\date{}
+
+\begin{document}
+\maketitle
+
+\section{Geometry, model, and scope}
+
+We consider the three-dimensional geometry of the original imaging
+function: the transverse variables belong to $\R^2$, and the longitudinal
+coordinate is positive below the array. The true and trial velocities are
+smooth, uniformly positive, bounded profiles depending only on depth:
+\begin{equation}
+c_0=c_0(x_\parallel),\qquad c=c(x_\parallel).
+\label{eq:profiles}
+\end{equation}
+The profiles are extended smoothly across the array plane when defining
+the full-space Green's functions. There is no reflecting boundary at
+$x_\parallel=0$. We use the scalar constant-density Helmholtz model
+\begin{equation}
+\left[\Delta_{\by}+\frac{\omega^2}{c(y_\parallel)^2}\right]
+\widehat G(\omega,(\bx_\perp,0),\by)
+=-\delta\big(\by-(\bx_\perp,0)\big),
+\label{eq:helmholtz}
+\end{equation}
+with outgoing conditions. The function $\widehat G_0$ is defined in the
+same way with $c_0$. We retain the direct outgoing arrival in the
+high-frequency, slowly varying regime. Smoothness alone does not make
+this approximation exact: wavelength-scale variations and significant
+reflected arrivals are excluded from the leading model below.
+
+The single-scattering data model is
+\begin{align}
+\widehat u(\omega,\bx_n,\bx_{n'})
+={}&\frac{1}{B}\widehat f\!\left(\frac{\omega-\omega_0}{B}\right)
+\int_{\R^2\times\R^+}\rho(\by)
+\widehat G_0(\omega,(\bx_n,0),\by)
+\widehat G_0(\omega,\by,(\bx_{n'},0))\dd\by.
+\label{eq:data}
+\end{align}
+The reflectivity is supported below the array and away from the source
+plane. We do not assume that it varies slowly. Reciprocity is used for
+the second Green's function. Our Fourier convention is
+\begin{equation}
+\widehat f(\omega)=\int_\R f(t)e^{i\omega t}\dd t,
+\qquad
+f(t)=\frac{1}{2\pi}\int_\R\widehat f(\omega)e^{-i\omega t}\dd\omega.
+\label{eq:fourier}
+\end{equation}
+The spectrum is concentrated near the positive carrier $\omega_0$, with
+$B\ll\omega_0$, and $f$ is localized around zero.
+
+As in the original notation, let
+\begin{equation}
+\bz=(\bz_\perp,z_\parallel),\qquad
+\bz_\pm=(\bz_\perp\pm\bzeta_\perp/2,z_\parallel).
+\label{eq:zpm}
+\end{equation}
+The two-point imaging function is
+\begin{align}
+\mathcal I(\bz,\bzeta_\perp;c)
+={}&\int_\R\dd\omega
+\iint_{\R^2\times\R^2}\dd\bx_n\dd\bx_{n'}
+e^{-(|\bx_n|^2+|\bx_{n'}|^2)/a^2}
+\nonumber\\
+&\times
+\overline{\widehat G(\omega,(\bx_n,0),\bz_+)}
+\widehat u(\omega,\bx_n,\bx_{n'})
+\overline{\widehat G(\omega,(\bx_{n'},0),\bz_-)}.
+\label{eq:image}
+\end{align}
+All subsequent factorizations are leading-order statements in a reduced
+model. They are not exact identities for \eqref{eq:helmholtz}.
+The assumption \eqref{eq:profiles} is essential: an arbitrary smooth
+map depending on the transverse coordinates requires a different ray
+geometry and transverse phase, and is not covered by this derivation.
+
+\section{Travel time and amplitude for the smooth profile}
+
+\subsection{Step 1: derive the paraxial travel time}
+
+The eikonal equation is $|\nabla T|^2=c^{-2}$. For a direct ray from the
+origin to $(\bx_\perp,x_\parallel)$, stratification conserves transverse
+slowness. Its magnitude is the existing variable $p$, with
+$p\sup_{0\leq s\leq x_\parallel}c(s)<1$. The ray representation is
+\begin{align}
+T(\bx_\perp,x_\parallel)
+&=p|\bx_\perp|
++\int_0^{x_\parallel}\sqrt{c(s)^{-2}-p^2}\dd s,
+\label{eq:ray-time}\\
+|\bx_\perp|
+&=p\int_0^{x_\parallel}
+\frac{c(s)}{\sqrt{1-p^2c(s)^2}}\dd s.
+\label{eq:ray-arrival}
+\end{align}
+The second identity also follows by stationarity of the first expression
+with respect to $p$.
+
+Retain the definitions
+\begin{equation}
+T_c(x_\parallel)=\int_0^{x_\parallel}\frac{\dd s}{c(s)},
+\qquad
+U_c(x_\parallel)=\int_0^{x_\parallel}c(s)\dd s.
+\label{eq:TU}
+\end{equation}
+The definitions of $T_0,U_0$ use $c_0$ instead of $c$.
+The typical speed $\overline c$ is assumed comparable to both profiles
+on the propagation region. Expansion of \eqref{eq:ray-arrival} gives
+\begin{equation}
+|\bx_\perp|
+=pU_c(x_\parallel)
++\frac{p^3}{2}\int_0^{x_\parallel}c(s)^3\dd s
++O\big(p^5\overline c^{\,5}x_\parallel\big).
+\label{eq:p-expansion}
+\end{equation}
+Inverting this relation, first at linear order and then at cubic order,
+yields
+\begin{align}
+p={}&\frac{|\bx_\perp|}{U_c(x_\parallel)}
+-\frac{|\bx_\perp|^3}{2U_c(x_\parallel)^4}
+\int_0^{x_\parallel}c(s)^3\dd s
++O\!\left(\frac{|\bx_\perp|^5}{\overline c\,x_\parallel^5}\right).
+\label{eq:p-inversion}
+\end{align}
+Indeed, the cubic correction to $pU_c$ must cancel the cubic term in
+\eqref{eq:p-expansion}. Expanding the square root in \eqref{eq:ray-time}
+before substituting \eqref{eq:p-inversion} gives
+\begin{align}
+T(\bx_\perp,x_\parallel)
+={}&T_c(x_\parallel)+p|\bx_\perp|
+-\frac{p^2}{2}U_c(x_\parallel)
+-\frac{p^4}{8}\int_0^{x_\parallel}c(s)^3\dd s
++O\big(p^6\overline c^{\,5}x_\parallel\big)\\
+={}&T_c(x_\parallel)
++\frac{|\bx_\perp|^2}{2U_c(x_\parallel)}
+-\frac{|\bx_\perp|^4}{8U_c(x_\parallel)^4}
+\int_0^{x_\parallel}c(s)^3\dd s
++O\!\left(\frac{|\bx_\perp|^6}{\overline c\,x_\parallel^5}\right).
+\label{eq:travel-fourth}
+\end{align}
+Consequently, the quadratic paraxial travel time is
+\begin{equation}
+T(\bx_\perp,x_\parallel)
+\simeq T_c(x_\parallel)
++\frac{|\bx_\perp|^2}{2U_c(x_\parallel)}.
+\label{eq:travel-paraxial}
+\end{equation}
+Besides small ray angles, using this approximation inside an oscillatory
+Green's function requires the discarded phase to be small:
+\begin{equation}
+\frac{\omega_0|\bx_\perp|^4}{U_c(x_\parallel)^4}
+\int_0^{x_\parallel}c(s)^3\dd s\ll1.
+\label{eq:phase-remainder}
+\end{equation}
+This requirement applies to the true and trial propagation paths over the
+effective aperture and offset range.
+
+\subsection{Step 2: derive the Green's function amplitude}
+
+Writing the leading Green's function as $A e^{i\omega T}$ and
+substituting it into \eqref{eq:helmholtz} away from the source gives
+\begin{equation}
+\Delta A+i\omega\big(2\nabla A\cdot\nabla T+A\Delta T\big)
++\omega^2 A\big(c^{-2}-|\nabla T|^2\big)=0.
+\end{equation}
+The terms of orders $\omega^2$ and $\omega$ yield, respectively,
+\begin{equation}
+|\nabla T|^2=c^{-2},\qquad
+2\nabla A\cdot\nabla T+A\Delta T=0,
+\end{equation}
+or equivalently $\nabla\cdot(A^2\nabla T)=0$.
+
+To compute the amplitude explicitly, evaluate the paraxial transport
+equation on the central ray. From \eqref{eq:travel-paraxial},
+\begin{equation}
+\partial_{x_\parallel}T(\mathbf0,x_\parallel)
+=\frac{1}{c(x_\parallel)},\qquad
+\Delta T(\mathbf0,x_\parallel)
+=-\frac{c'(x_\parallel)}{c(x_\parallel)^2}
++\frac{2}{U_c(x_\parallel)}.
+\end{equation}
+The factor $2$ comes from the two transverse coordinates. Taking the
+leading amplitude to depend on depth gives
+\begin{equation}
+\frac{2A'}{c}+A\left(-\frac{c'}{c^2}+\frac{2}{U_c}\right)=0,
+\qquad
+\frac{2A'}{A}=\frac{c'}{c}-\frac{2c}{U_c}.
+\end{equation}
+Since $U_c'=c$, integration gives
+\begin{equation}
+\frac{A^2}{c(x_\parallel)}U_c(x_\parallel)^2
+=\text{constant along the ray}.
+\end{equation}
+This also expresses conservation of flux in a paraxial ray tube whose
+cross-sectional area is proportional to $U_c(x_\parallel)^2$.
+Close to the source, $U_c(x_\parallel)\sim c(0)x_\parallel$ and the
+leading paraxial homogeneous amplitude is $1/(4\pi x_\parallel)$.
+The constant is thus $c(0)/(16\pi^2)$, so that
+\begin{equation}
+A\simeq\frac{\sqrt{c(0)c(x_\parallel)}}{4\pi U_c(x_\parallel)}.
+\label{eq:amplitude}
+\end{equation}
+This also specifies the model dependence of the amplitude: the same
+prefactor should not be assumed for a variable-density operator.
+
+Transverse translation invariance now gives
+\begin{align}
+\widehat G_0(\omega,(\bx_n,0),\by)
+&\simeq\frac{\sqrt{c_0(0)c_0(y_\parallel)}}{4\pi U_0(y_\parallel)}
+\exp\!\left\{i\omega\left[T_0(y_\parallel)
++\frac{|\bx_n-\by_\perp|^2}{2U_0(y_\parallel)}\right]\right\},
+\label{eq:G0}\\
+\widehat G(\omega,(\bx_n,0),\bz_\pm)
+&\simeq\frac{\sqrt{c(0)c(z_\parallel)}}{4\pi U_c(z_\parallel)}
+\exp\!\left\{i\omega\left[T_c(z_\parallel)
++\frac{|\bx_n-\bz_\perp\mp\bzeta_\perp/2|^2}{2U_c(z_\parallel)}\right]\right\}.
+\label{eq:Gc}
+\end{align}
+
+\section{Point-source data: derive the offset profile}
+
+\subsection{Step 3: choose the depth coordinate and matched true depth}
+
+Fix $\bz_\perp$ and $u_\parallel>0$. Positivity of the profiles makes
+$T_c,U_c,T_0,U_0$ strictly increasing. Define, as in the original text,
+\begin{align}
+z_{\parallel,c}&=U_c^{-1}(u_\parallel),
+&y_{\parallel,c}&=T_0^{-1}\big(T_c(z_{\parallel,c})\big),
+\label{eq:matched-depths}\\
+\mathcal J(\bzeta_\perp,u_\parallel,c)
+&=\mathcal I\big((\bz_\perp,z_{\parallel,c}),\bzeta_\perp;c\big),
+\label{eq:Jdef}
+\end{align}
+and
+\begin{equation}
+m(u_\parallel,c)^2
+=\frac{u_\parallel}{U_0(y_{\parallel,c})}
+=\frac{u_\parallel}
+{\big(U_0\circ T_0^{-1}\circ T_c\circ U_c^{-1}\big)(u_\parallel)}.
+\label{eq:m}
+\end{equation}
+Thus
+\begin{equation}
+U_c(z_{\parallel,c})=u_\parallel,\qquad
+T_0(y_{\parallel,c})=T_c(z_{\parallel,c}),\qquad
+U_0(y_{\parallel,c})=\frac{u_\parallel}{m^2}.
+\label{eq:matching}
+\end{equation}
+The dimensions of $u_\parallel$ are length squared divided by time.
+For a nonconstant profile, $m$ is an integrated mismatch, not a
+pointwise ratio of velocities. Both matched depths depend on $c$.
+
+\subsection{Step 4: substitute the data and the Green's functions}
+
+Substitution of \eqref{eq:data}, \eqref{eq:G0}, and \eqref{eq:Gc} into
+\eqref{eq:image} gives, before any bandwidth or depth localization,
+\begin{align}
+\mathcal J(\bzeta_\perp,u_\parallel,c)
+\simeq{}&\int_\R\dd\omega\int_{\R^2\times\R^+}\dd\by\,
+\rho(\by)\frac{1}{B}\widehat f\!\left(\frac{\omega-\omega_0}{B}\right)
+\frac{c_0(0)c_0(y_\parallel)c(0)c(z_{\parallel,c})}
+{256\pi^4U_0(y_\parallel)^2u_\parallel^2}
+e^{2i\omega[T_0(y_\parallel)-T_c(z_{\parallel,c})]}
+\nonumber\\
+&\times\int_{\R^2}\dd\bx_n\,
+\exp\!\left\{-\frac{|\bx_n|^2}{a^2}
++\frac{i\omega}{2}\left[
+\frac{|\bx_n-\by_\perp|^2}{U_0(y_\parallel)}
+-\frac{|\bx_n-\bz_\perp-\bzeta_\perp/2|^2}{u_\parallel}
+\right]\right\}
+\nonumber\\
+&\times\int_{\R^2}\dd\bx_{n'}\,
+\exp\!\left\{-\frac{|\bx_{n'}|^2}{a^2}
++\frac{i\omega}{2}\left[
+\frac{|\bx_{n'}-\by_\perp|^2}{U_0(y_\parallel)}
+-\frac{|\bx_{n'}-\bz_\perp+\bzeta_\perp/2|^2}{u_\parallel}
+\right]\right\}.
+\label{eq:J-before-localization}
+\end{align}
+The prefactor is the product of four Green's function amplitudes;
+this explains the power $256\pi^4$ and both squared longitudinal
+denominators.
+
+\subsection{Step 5: integrate frequency under explicit conditions}
+
+We first replace $\omega$ by $\omega_0$ only in the transverse phases.
+A sufficient condition, in addition to $B\ll\omega_0$, is
+\begin{equation}
+B\left|
+\frac{|\bx_n-\by_\perp|^2}{2U_0(y_\parallel)}
+-\frac{|\bx_n-\bz_\perp\mp\bzeta_\perp/2|^2}{2u_\parallel}
+\right|\ll1,
+\label{eq:point-band-condition}
+\end{equation}
+for the contributing source and receiver positions and offsets.
+Indeed, the phase error is the bracket in
+\eqref{eq:point-band-condition} multiplied by $\omega-\omega_0$.
+The axial phase must retain its full frequency dependence. By
+\eqref{eq:fourier} and the change of variable
+$\omega\mapsto(\omega-\omega_0)/B$,
+\begin{align}
+&\int_\R\frac{\dd\omega}{B}
+\widehat f\!\left(\frac{\omega-\omega_0}{B}\right)
+e^{2i\omega[T_0(y_\parallel)-T_c(z_{\parallel,c})]}
+\nonumber\\
+&\qquad=2\pi
+f\!\left(2B[T_c(z_{\parallel,c})-T_0(y_\parallel)]\right)
+e^{2i\omega_0[T_0(y_\parallel)-T_c(z_{\parallel,c})]}.
+\label{eq:frequency-integral}
+\end{align}
+This accounts for the factor $2\pi$ and for the sign of the argument
+of $f$.
+
+\subsection{Step 6: justify freezing the transverse coefficients}
+
+The pulse envelope in \eqref{eq:frequency-integral} selects
+\begin{equation}
+|T_0(y_\parallel)-T_0(y_{\parallel,c})|\lesssim B^{-1}.
+\label{eq:time-window}
+\end{equation}
+If the profile changes little in this time window, Taylor expansion gives
+\begin{equation}
+T_0(y_\parallel)-T_0(y_{\parallel,c})
+=\frac{y_\parallel-y_{\parallel,c}}{c_0(y_{\parallel,c})}
++O\!\left(
+|y_\parallel-y_{\parallel,c}|^2
+\sup\frac{|c_0'|}{c_0^2}\right),
+\end{equation}
+where the supremum is taken between the two depths. Hence the selected
+depth range has size $c_0(y_{\parallel,c})/B$.
+
+For all contributing depths in \eqref{eq:time-window}, we assume
+\begin{gather}
+\left|\frac{c_0(y_\parallel)}{c_0(y_{\parallel,c})}-1\right|\ll1,
+\qquad
+\left|\frac{U_0(y_\parallel)}{U_0(y_{\parallel,c})}-1\right|\ll1,
+\label{eq:freeze-amplitude}\\
+\omega_0|\bx_n-\by_\perp|^2
+\left|\frac{1}{U_0(y_\parallel)}
+-\frac{1}{U_0(y_{\parallel,c})}\right|\ll1,
+\label{eq:freeze-phase}
+\end{gather}
+and the same phase condition for $\bx_{n'}$.
+The last condition is stronger than merely requiring a small relative
+change in $U_0$: it controls an oscillatory phase.
+When first-order estimates are valid, sufficient local size conditions
+are
+\begin{equation}
+\frac{|c_0'(y_{\parallel,c})|}{B}\ll1,\qquad
+\frac{c_0(y_{\parallel,c})^2}{B\,U_0(y_{\parallel,c})}\ll1,\qquad
+\frac{\omega_0 c_0(y_{\parallel,c})^2|\bx_n-\by_\perp|^2}
+{B\,U_0(y_{\parallel,c})^2}\ll1.
+\label{eq:freeze-scales}
+\end{equation}
+These estimates clarify why narrow relative bandwidth does not, by
+itself, justify axial localization.
+
+Under these conditions we replace $U_0(y_\parallel)$ by
+$U_0(y_{\parallel,c})=u_\parallel/m^2$ in the transverse phases, and
+$c_0(y_\parallel)/U_0(y_\parallel)^2$ by
+$c_0(y_{\parallel,c})m^4/u_\parallel^2$ in the amplitude.
+We retain $T_0(y_\parallel)$ exactly in the axial phase and envelope,
+and retain the full reflectivity $\rho(\by_\perp,y_\parallel)$.
+
+Combining these replacements with \eqref{eq:frequency-integral} yields
+\begin{align}
+\mathcal J(\bzeta_\perp,u_\parallel,c)
+\simeq{}&
+\frac{c_0(0)c_0(y_{\parallel,c})c(0)c(z_{\parallel,c})m^4}
+{128\pi^3u_\parallel^4}
+\int_{\R^2\times\R^+}\dd\by\,\rho(\by)
+f\!\left(2B[T_c(z_{\parallel,c})-T_0(y_\parallel)]\right)
+\nonumber\\
+&\times e^{2i\omega_0[T_0(y_\parallel)-T_c(z_{\parallel,c})]}
+\nonumber\\
+&\times\int_{\R^2}\dd\bx_n\,
+\exp\!\left\{-\frac{|\bx_n|^2}{a^2}
++\frac{i\omega_0}{2u_\parallel}
+\left[m^2|\bx_n-\by_\perp|^2
+-|\bx_n-\bz_\perp-\bzeta_\perp/2|^2\right]\right\}
+\nonumber\\
+&\times\int_{\R^2}\dd\bx_{n'}\,
+\exp\!\left\{-\frac{|\bx_{n'}|^2}{a^2}
++\frac{i\omega_0}{2u_\parallel}
+\left[m^2|\bx_{n'}-\by_\perp|^2
+-|\bx_{n'}-\bz_\perp+\bzeta_\perp/2|^2\right]\right\}.
+\label{eq:J-frozen}
+\end{align}
+
+\subsection{Step 7: evaluate both Gaussian integrals}
+
+Set, with the original notation,
+\begin{equation}
+\alpha(u_\parallel,c)=\frac{\omega_0a^2}{2u_\parallel}(m^2-1).
+\label{eq:alpha}
+\end{equation}
+At fixed $(u_\parallel,c)$, write $\alpha=\alpha(u_\parallel,c)$ and
+$m=m(u_\parallel,c)$ in the calculations. Expanding the transverse
+quadratics gives
+\begin{align}
+&m^2|\bx-\by_\perp|^2
+-|\bx-\bz_\perp\mp\bzeta_\perp/2|^2
+\nonumber\\
+&\qquad=(m^2-1)|\bx|^2
+-2\bx\cdot\big(m^2\by_\perp-\bz_\perp\mp\bzeta_\perp/2\big)
++m^2|\by_\perp|^2-|\bz_\perp\pm\bzeta_\perp/2|^2.
+\label{eq:expand-quadratic}
+\end{align}
+The coefficient of $-|\bx|^2$ is $(1-i\alpha)/a^2$, whose real
+part is positive. Completing the square in each transverse coordinate
+gives the two-dimensional identity, for real $\bk$,
+\begin{equation}
+\int_{\R^2}
+\exp\!\left[-\frac{1-i\alpha}{a^2}|\bx|^2
+-\frac{i\omega_0}{u_\parallel}\bx\cdot\bk\right]\dd\bx
+=\frac{\pi a^2}{1-i\alpha}
+\exp\!\left[-\frac{\omega_0^2a^2|\bk|^2}
+{4u_\parallel^2(1-i\alpha)}\right].
+\label{eq:gaussian-point}
+\end{equation}
+For clarity, the completion in the exponent reads
+\begin{align}
+&-\frac{1-i\alpha}{a^2}|\bx|^2
+-\frac{i\omega_0}{u_\parallel}\bx\cdot\bk
+\nonumber\\
+&\quad=-\frac{1-i\alpha}{a^2}
+\sum_{j=1}^2\left(x_j+
+\frac{i\omega_0a^2 k_j}{2u_\parallel(1-i\alpha)}\right)^2
+-\frac{\omega_0^2a^2|\bk|^2}{4u_\parallel^2(1-i\alpha)}.
+\end{align}
+The shifted Gaussian integrals are evaluated by contour translation;
+their decay is ensured by the positive real part above.
+
+Apply \eqref{eq:gaussian-point} with
+$\bk=m^2\by_\perp-\bz_\perp\mp\bzeta_\perp/2$ and restore the
+constant terms in \eqref{eq:expand-quadratic}. The product of the two
+array integrals is
+\begin{align}
+&\frac{\pi^2a^4}{(1-i\alpha)^2}
+\exp\!\left[-\frac{\omega_0^2a^2}
+{4u_\parallel^2(1-i\alpha)}
+\left(2|m^2\by_\perp-\bz_\perp|^2
++\frac{|\bzeta_\perp|^2}{2}\right)\right]
+\nonumber\\
+&\qquad\times
+\exp\!\left[\frac{i\omega_0}{2u_\parallel}
+\left(2m^2|\by_\perp|^2-2|\bz_\perp|^2
+-\frac{|\bzeta_\perp|^2}{2}\right)\right].
+\label{eq:gaussian-product}
+\end{align}
+Here we used explicitly
+\begin{align}
+|m^2\by_\perp-\bz_\perp-\bzeta_\perp/2|^2
++|m^2\by_\perp-\bz_\perp+\bzeta_\perp/2|^2
+&=2|m^2\by_\perp-\bz_\perp|^2+\frac{|\bzeta_\perp|^2}{2},\\
+|\bz_\perp+\bzeta_\perp/2|^2
++|\bz_\perp-\bzeta_\perp/2|^2
+&=2|\bz_\perp|^2+\frac{|\bzeta_\perp|^2}{2}.
+\end{align}
+
+\subsection{Step 8: isolate the offset dependence}
+
+All terms containing $\bzeta_\perp$ in
+\eqref{eq:gaussian-product} are independent of $\by$. Thus
+\begin{equation}
+\mathcal J(\bzeta_\perp,u_\parallel,c)
+\simeq\mathcal J(\mathbf 0,u_\parallel,c)
+\Psi(\bzeta_\perp,u_\parallel,c),
+\label{eq:factor-point}
+\end{equation}
+where the zero-offset factor is
+\begin{align}
+\mathcal J(\mathbf0,u_\parallel,c)
+\simeq{}&\frac{a^4c_0(0)c_0(y_{\parallel,c})c(0)c(z_{\parallel,c})m^4}
+{128\pi u_\parallel^4[1-i\alpha(u_\parallel,c)]^2}
+\int_{\R^2\times\R^+}\dd\by\,\rho(\by)
+\nonumber\\
+&\times f\!\left(2B[T_c(z_{\parallel,c})-T_0(y_\parallel)]\right)
+e^{2i\omega_0[T_0(y_\parallel)-T_c(z_{\parallel,c})]}
+\nonumber\\
+&\times\exp\!\left[
+-\frac{\omega_0^2a^2|m^2\by_\perp-\bz_\perp|^2}
+{2u_\parallel^2[1-i\alpha(u_\parallel,c)]}
++\frac{i\omega_0}{u_\parallel}
+\big(m^2|\by_\perp|^2-|\bz_\perp|^2\big)\right],
+\label{eq:J0-point}
+\end{align}
+and the offset factor is
+\begin{align}
+\Psi(\bzeta_\perp,u_\parallel,c)
+&=\exp\!\left[
+-\frac{\omega_0^2a^2|\bzeta_\perp|^2}
+{8u_\parallel^2[1-i\alpha(u_\parallel,c)]}
+-\frac{i\omega_0|\bzeta_\perp|^2}{4u_\parallel}\right]
+\label{eq:Psi-complex}\\
+&=\exp\!\left[-\frac{|\bzeta_\perp|^2}{2\ell(u_\parallel,c)^2}
+-i\gamma(u_\parallel,c)|\bzeta_\perp|^2\right].
+\label{eq:Psi-point}
+\end{align}
+Using $(1-i\alpha)^{-1}=(1+i\alpha)/(1+\alpha^2)$, we find
+\begin{align}
+\ell(u_\parallel,c)^2
+&=\frac{4u_\parallel^2}{\omega_0^2a^2}
+\big[1+\alpha(u_\parallel,c)^2\big]
+\nonumber\\
+&=\frac{4u_\parallel^2}{\omega_0^2a^2}
++a^2\big(m(u_\parallel,c)^2-1\big)^2,
+\label{eq:ell-point}\\
+\gamma(u_\parallel,c)
+&=\frac{\omega_0}{4u_\parallel}
++\frac{\omega_0^2a^2\alpha(u_\parallel,c)}
+{8u_\parallel^2[1+\alpha(u_\parallel,c)^2]}
+\nonumber\\
+&=\frac{\omega_0}{4u_\parallel}
+\frac{1+m^2(m^2-1)\omega_0^2a^4/(4u_\parallel^2)}
+{1+(m^2-1)^2\omega_0^2a^4/(4u_\parallel^2)}.
+\label{eq:gamma-point}
+\end{align}
+These are the original width and phase expressions, now accompanied by
+the hypotheses needed to factor them out of the depth integral.
+Without the freezing step, the offset dependence remains coupled to
+$y_\parallel$, so independence from $\rho$ does not follow.
+
+\subsection{Step 9: check the homogeneous limit}
+
+For constant velocities,
+\begin{equation}
+T_c(z_\parallel)=\frac{z_\parallel}{c},\quad
+U_c(z_\parallel)=cz_\parallel,\quad
+z_{\parallel,c}=\frac{u_\parallel}{c},\quad
+y_{\parallel,c}=\frac{u_\parallel c_0}{c^2},\quad
+m=\frac{c}{c_0}.
+\end{equation}
+The amplitude factor in \eqref{eq:J0-point} reduces to
+\begin{equation}
+c_0(0)c_0(y_{\parallel,c})c(0)c(z_{\parallel,c})m^4
+=c_0^2c^2m^4=c_0^4m^6.
+\end{equation}
+Also,
+\begin{equation}
+|m^2\by_\perp-\bz_\perp|^2
+=m^2\left|m\by_\perp-\frac{\bz_\perp}{m}\right|^2.
+\end{equation}
+Hence both the prefactor and the transverse exponent agree with the
+homogeneous formula. No extra depth Jacobian appears, since the
+integration variable $y_\parallel$ was not changed.
+
+\section{Plane-wave data for the same smooth profile}
+
+\subsection{Step 10: derive the spectral Green's function}
+
+Retain the plane-wave data and Green's function definitions
+\begin{align}
+\widehat v(\omega,\bkappa_n,\bkappa_{n'})
+&=\iint_{\R^2\times\R^2}
+e^{-i\bkappa_n\cdot\bx_n-i\bkappa_{n'}\cdot\bx_{n'}}
+\widehat u(\omega,\bx_n,\bx_{n'})\dd\bx_n\dd\bx_{n'},
+\label{eq:plane-data}\\
+\widehat H(\omega,\bkappa,\bz)
+&=\int_{\R^2}
+\widehat G(\omega,(\bx_\perp,0),\bz)
+e^{-i\bkappa\cdot\bx_\perp}\dd\bx_\perp.
+\end{align}
+These definitions use unnormalized transverse Fourier transforms.
+Translation invariance gives
+\begin{equation}
+\widehat G(\omega,(\bx_\perp,0),\by)
+=\frac{1}{(2\pi)^2}\int_{\R^2}
+g(\omega,\bkappa,y_\parallel)
+e^{i\bkappa\cdot(\bx_\perp-\by_\perp)}\dd\bkappa,
+\end{equation}
+where
+\begin{equation}
+\partial_{y_\parallel}^2g+
+\left(\frac{\omega^2}{c(y_\parallel)^2}-|\bkappa|^2\right)g
+=-\delta(y_\parallel),
+\qquad
+\widehat H(\omega,\bkappa,\bz)
+=g(\omega,\bkappa,z_\parallel)e^{-i\bkappa\cdot\bz_\perp}.
+\label{eq:g-ode}
+\end{equation}
+For positive frequencies and propagating, nonturning components, define
+the existing longitudinal wavenumber
+\begin{equation}
+q(\omega,\bkappa,s)
+=\sqrt{\frac{\omega^2}{c(s)^2}-|\bkappa|^2}>0.
+\end{equation}
+Insert $g=Ae^{i\phi}$ into \eqref{eq:g-ode} away from the source:
+\begin{equation}
+\partial_s^2A+2i(\partial_s\phi)(\partial_sA)
++i(\partial_s^2\phi)A+
+\big[q^2-(\partial_s\phi)^2\big]A=0.
+\end{equation}
+The outgoing choice is $\partial_s\phi=q$. Dropping $\partial_s^2A$
+at leading transport order gives
+\begin{equation}
+2q\,\partial_s A+(\partial_s q)A=0,
+\qquad \partial_s(qA^2)=0.
+\end{equation}
+This WKB approximation requires, in particular,
+\begin{equation}
+\frac{|\partial_s q|}{q^2}\ll1,
+\qquad
+\frac{|\partial_s^2q|}{q^3}\ll1
+\label{eq:WKB-conditions}
+\end{equation}
+along the relevant paths; these must hold for both profiles.
+At the source, the local outgoing solution is
+$i e^{iq(\omega,\bkappa,0)|y_\parallel|}/[2q(\omega,\bkappa,0)]$:
+its derivative jump is $-1$. Matching fixes the amplitude and yields
+\begin{equation}
+g(\omega,\bkappa,y_\parallel)
+\simeq\frac{i}{2\sqrt{q(\omega,\bkappa,0)
+q(\omega,\bkappa,y_\parallel)}}
+\exp\!\left(i\int_0^{y_\parallel}q(\omega,\bkappa,s)\dd s\right).
+\label{eq:WKB-g}
+\end{equation}
+
+For the effective angular aperture, assume
+$\kappa_0\overline c/\omega_0\ll1$. Then
+\begin{align}
+q(\omega,\bkappa,s)
+&=\frac{\omega}{c(s)}
+-\frac{|\bkappa|^2c(s)}{2\omega}
+-\frac{|\bkappa|^4c(s)^3}{8\omega^3}
++O\!\left(\frac{|\bkappa|^6\overline c^{\,5}}{\omega^5}\right),\\
+\frac{1}{\sqrt{q(\omega,\bkappa,0)q(\omega,\bkappa,y_\parallel)}}
+&=\frac{\sqrt{c(0)c(y_\parallel)}}{\omega}
+\left[1+O\!\left(\frac{|\bkappa|^2\overline c^{\,2}}{\omega^2}\right)\right].
+\end{align}
+Discarding the quartic phase requires, in addition,
+\begin{equation}
+\frac{\kappa_0^4}{\omega_0^3}
+\int_0^{y_\parallel}c(s)^3\dd s\ll1,
+\label{eq:plane-paraxial-phase}
+\end{equation}
+and likewise for $c_0$. Therefore,
+\begin{equation}
+g(\omega,\bkappa,y_\parallel)
+\simeq\frac{i\sqrt{c(0)c(y_\parallel)}}{2\omega}
+\exp\!\left(i\omega T_c(y_\parallel)
+-\frac{i|\bkappa|^2U_c(y_\parallel)}{2\omega}\right).
+\label{eq:g-paraxial}
+\end{equation}
+
+\subsection{Step 11: compute the two spectral Gaussian integrals}
+
+The plane-wave imaging function is
+\begin{align}
+\mathcal I_{\rm p}(\bz,\bzeta_\perp;c)
+={}&\int_\R\dd\omega
+\iint_{\R^2\times\R^2}\dd\bkappa_n\dd\bkappa_{n'}
+e^{-(|\bkappa_n|^2+|\bkappa_{n'}|^2)/\kappa_0^2}
+\overline{\widehat H(\omega,\bkappa_n,\bz_+)}
+\widehat v(\omega,\bkappa_n,\bkappa_{n'})
+\overline{\widehat H(\omega,\bkappa_{n'},\bz_-)}.
+\end{align}
+Fourier transforming \eqref{eq:data} directly gives
+\begin{align}
+\widehat v(\omega,\bkappa,\bkappa')
+={}&\frac{1}{B}\widehat f\!\left(\frac{\omega-\omega_0}{B}\right)
+\int_{\R^2\times\R^+}\dd\by\,\rho(\by)
+g_0(\omega,\bkappa,y_\parallel)
+g_0(\omega,\bkappa',y_\parallel)
+e^{-i(\bkappa+\bkappa')\cdot\by_\perp}.
+\end{align}
+There are no remaining factors of $(2\pi)$ with the stated transform
+convention. Consequently,
+\begin{align}
+\mathcal I_{\rm p}(\bz,\bzeta_\perp;c)
+={}&\int_\R\dd\omega\int_{\R^2\times\R^+}\dd\by\,
+\rho(\by)\frac{1}{B}\widehat f\!\left(\frac{\omega-\omega_0}{B}\right)
+\nonumber\\
+&\times\int_{\R^2}\dd\bkappa\,
+e^{-|\bkappa|^2/\kappa_0^2}
+e^{i\bkappa\cdot(\bz_\perp+\bzeta_\perp/2-\by_\perp)}
+g_0(\omega,\bkappa,y_\parallel)
+\overline{g(\omega,\bkappa,z_\parallel)}
+\nonumber\\
+&\times\int_{\R^2}\dd\bkappa'\,
+e^{-|\bkappa'|^2/\kappa_0^2}
+e^{i\bkappa'\cdot(\bz_\perp-\bzeta_\perp/2-\by_\perp)}
+g_0(\omega,\bkappa',y_\parallel)
+\overline{g(\omega,\bkappa',z_\parallel)}.
+\label{eq:Ip-exact-spectral}
+\end{align}
+From \eqref{eq:g-paraxial}, the Green's function product in each
+spectral integral is
+\begin{align}
+g_0(\omega,\bkappa,y_\parallel)
+\overline{g(\omega,\bkappa,z_\parallel)}
+\simeq{}&\frac{\sqrt{c_0(0)c_0(y_\parallel)c(0)c(z_\parallel)}}{4\omega^2}
+e^{i\omega[T_0(y_\parallel)-T_c(z_\parallel)]}
+\nonumber\\
+&\times\exp\!\left[-\frac{i|\bkappa|^2}{2\omega}
+\big(U_0(y_\parallel)-U_c(z_\parallel)\big)\right].
+\end{align}
+Using the two-dimensional Gaussian formula once more, its transverse
+integral, without the preceding amplitude and axial phase, is
+\begin{align}
+&\int_{\R^2}\dd\bkappa\,
+\exp\!\left[-\left(\frac{1}{\kappa_0^2}
++\frac{i[U_0(y_\parallel)-U_c(z_\parallel)]}{2\omega}\right)|\bkappa|^2
++i\bkappa\cdot(\bz_\perp\pm\bzeta_\perp/2-\by_\perp)\right]
+\nonumber\\
+&\quad=\frac{\pi\kappa_0^2}
+{1+i\kappa_0^2[U_0(y_\parallel)-U_c(z_\parallel)]/(2\omega)}
+\nonumber\\
+&\qquad\times\exp\!\left[-\frac{\kappa_0^2
+|\bz_\perp\pm\bzeta_\perp/2-\by_\perp|^2}
+{4\{1+i\kappa_0^2[U_0(y_\parallel)-U_c(z_\parallel)]/(2\omega)\}}\right].
+\label{eq:plane-gaussian}
+\end{align}
+Multiplication of the two integrals therefore yields the paraxial
+expression before the bandwidth and depth approximations:
+\begin{align}
+\mathcal I_{\rm p}(\bz,\bzeta_\perp;c)
+\simeq{}&\int_\R\dd\omega\int_{\R^2\times\R^+}\dd\by\,
+\rho(\by)\frac{1}{B}\widehat f\!\left(\frac{\omega-\omega_0}{B}\right)
+\nonumber\\
+&\times\frac{\pi^2\kappa_0^4c_0(0)c_0(y_\parallel)c(0)c(z_\parallel)}
+{16\omega^4
+\{1+i\kappa_0^2[U_0(y_\parallel)-U_c(z_\parallel)]/(2\omega)\}^2}
+\nonumber\\
+&\times e^{2i\omega[T_0(y_\parallel)-T_c(z_\parallel)]}
+\exp\!\left[-\frac{\kappa_0^2
+(4|\by_\perp-\bz_\perp|^2+|\bzeta_\perp|^2)}
+{8\{1+i\kappa_0^2[U_0(y_\parallel)-U_c(z_\parallel)]/(2\omega)\}}\right].
+\label{eq:Ip-before-localization}
+\end{align}
+
+\subsection{Step 12: localize and factor the plane-wave image}
+
+Set $z_\parallel=z_{\parallel,c}$ and define
+\begin{equation}
+\mathcal J_{\rm p}(\bzeta_\perp,u_\parallel,c)
+=\mathcal I_{\rm p}\big((\bz_\perp,z_{\parallel,c}),\bzeta_\perp;c\big).
+\end{equation}
+The same axial frequency integral \eqref{eq:frequency-integral} applies.
+In addition to $B\ll\omega_0$ and slow amplitude variation, sufficient
+conditions for freezing the transverse spectral phase are
+\begin{equation}
+\frac{B\kappa_0^2}{\omega_0^2}
+|U_0(y_\parallel)-u_\parallel|\ll1,
+\qquad
+\frac{\kappa_0^2}{\omega_0}
+|U_0(y_\parallel)-U_0(y_{\parallel,c})|\ll1.
+\label{eq:plane-freezing}
+\end{equation}
+The first controls changing $1/\omega$ to $1/\omega_0$; the second
+controls changing the true depth in the transverse phase. These
+conditions are imposed on the effective pulse window and angular
+aperture. In particular, the second is locally ensured by
+\begin{equation}
+\frac{\kappa_0^2c_0(y_{\parallel,c})^2}{\omega_0B}\ll1.
+\end{equation}
+Apply these approximations to \eqref{eq:Ip-before-localization}, keeping
+the axial phase and $\rho$ unchanged. The result is
+\begin{equation}
+\mathcal J_{\rm p}(\bzeta_\perp,u_\parallel,c)
+\simeq\mathcal J_{\rm p}(\mathbf0,u_\parallel,c)
+\Psi_{\rm p}(\bzeta_\perp,u_\parallel,c),
+\label{eq:factor-plane}
+\end{equation}
+with
+\begin{align}
+\mathcal J_{\rm p}(\mathbf0,u_\parallel,c)
+\simeq{}&
+\frac{\pi^3\kappa_0^4c_0(0)c_0(y_{\parallel,c})c(0)c(z_{\parallel,c})}
+{8\omega_0^4
+\{1+i\kappa_0^2[U_0(y_{\parallel,c})-u_\parallel]/(2\omega_0)\}^2}
+\nonumber\\
+&\times\int_{\R^2\times\R^+}\dd\by\,\rho(\by)
+f\!\left(2B[T_c(z_{\parallel,c})-T_0(y_\parallel)]\right)
+\nonumber\\
+&\times e^{2i\omega_0[T_0(y_\parallel)-T_c(z_{\parallel,c})]}
+\exp\!\left[-\frac{\kappa_0^2|\by_\perp-\bz_\perp|^2}
+{2\{1+i\kappa_0^2[U_0(y_{\parallel,c})-u_\parallel]/(2\omega_0)\}}\right],
+\label{eq:J0-plane}\\
+\Psi_{\rm p}(\bzeta_\perp,u_\parallel,c)
+={}&\exp\!\left[-\frac{\kappa_0^2|\bzeta_\perp|^2}
+{8\{1+i\kappa_0^2[U_0(y_{\parallel,c})-u_\parallel]/(2\omega_0)\}}\right].
+\label{eq:Psi-plane-complex}
+\end{align}
+The frequency integral multiplies the prefactor in
+\eqref{eq:Ip-before-localization} by $2\pi$, giving the factor
+$\pi^3/8$ in \eqref{eq:J0-plane}.
+
+Use $U_0(y_{\parallel,c})=u_\parallel/m^2$ and rationalize:
+\begin{align}
+&\frac{1}{1+i\kappa_0^2[U_0(y_{\parallel,c})-u_\parallel]/(2\omega_0)}
+\nonumber\\
+&\quad=
+\frac{1+i\kappa_0^2u_\parallel(1-m^{-2})/(2\omega_0)}
+{1+\kappa_0^4u_\parallel^2(1-m^{-2})^2/(4\omega_0^2)}.
+\end{align}
+Thus
+\begin{equation}
+\Psi_{\rm p}(\bzeta_\perp,u_\parallel,c)
+=\exp\!\left[-\frac{|\bzeta_\perp|^2}{2\ell_{\rm p}(u_\parallel,c)^2}
+-i\gamma_{\rm p}(u_\parallel,c)|\bzeta_\perp|^2\right],
+\end{equation}
+where
+\begin{align}
+\ell_{\rm p}(u_\parallel,c)^2
+&=\frac{4}{\kappa_0^2}
+\left[1+\frac{\kappa_0^4u_\parallel^2}{4\omega_0^2}
+(1-m^{-2})^2\right],
+\label{eq:ell-plane}\\
+\gamma_{\rm p}(u_\parallel,c)
+&=\frac{\kappa_0^4u_\parallel}{16\omega_0}
+\frac{1-m^{-2}}
+{1+\kappa_0^4u_\parallel^2(1-m^{-2})^2/(4\omega_0^2)}.
+\label{eq:gamma-plane}
+\end{align}
+At the true profile, $m=1$, the point-source phase curvature is
+$\omega_0/(4u_\parallel)$, whereas the plane-wave phase curvature is
+zero. Their different values follow from the different imaging kernels.
+
+\section{Focusing criterion and identifiability}
+
+\subsection{Step 13: state what normalization and width minimization mean}
+
+Whenever the zero-offset image is nonzero and the approximation error is
+small relative to it, \eqref{eq:factor-point} implies
+\begin{equation}
+\frac{\mathcal J(\bzeta_\perp,u_\parallel,c)}
+{\mathcal J(\mathbf0,u_\parallel,c)}
+\simeq\Psi(\bzeta_\perp,u_\parallel,c),
+\end{equation}
+and the analogous statement holds for plane waves. The normalized
+profile is independent of reflectivity only at this leading order.
+If the denominator vanishes or is too small, this data ratio is
+undefined or unstable. The reduced-model function $\Psi$ itself
+remains well defined.
+
+At a fixed $u_\parallel$, \eqref{eq:ell-point} and
+\eqref{eq:ell-plane} show that either width is minimized exactly when
+\begin{equation}
+m(u_\parallel,c)=1
+\quad\Longleftrightarrow\quad
+U_0\!\left(T_0^{-1}\big(T_c(U_c^{-1}(u_\parallel))\big)\right)
+=u_\parallel.
+\label{eq:minimum-condition}
+\end{equation}
+This is one scalar matching condition at this value of $u_\parallel$;
+it does not identify an arbitrary smooth profile from one depth.
+
+\subsection{Step 14: correct the objective on the infinite depth axis}
+
+In two transverse dimensions, polar integration gives
+\begin{align}
+\int_{\R^2}|\Psi(\bzeta_\perp,u_\parallel,c)|^2\dd\bzeta_\perp
+&=\pi\ell(u_\parallel,c)^2,\\
+\int_{\R^2}|\Psi_{\rm p}(\bzeta_\perp,u_\parallel,c)|^2\dd\bzeta_\perp
+&=\pi\ell_{\rm p}(u_\parallel,c)^2.
+\end{align}
+The factor is $\pi\ell^2$, because squaring the modulus changes
+$e^{-|\bzeta_\perp|^2/(2\ell^2)}$ into
+$e^{-|\bzeta_\perp|^2/\ell^2}$.
+At $c=c_0$, these integrals equal
+$4\pi u_\parallel^2/(\omega_0^2a^2)$ and $4\pi/\kappa_0^2$,
+respectively. Their integrals over $\R^+$ both diverge.
+Consequently, the unmodified infinite-depth objectives do not define
+the claimed unique-minimizer problems.
+
+Keeping the original names for the objectives, a valid idealized
+replacement is to subtract the known minimum at each depth before
+integrating in $u_\parallel$:
+\begin{align}
+\mathcal L(c)
+&=\int_0^\infty\left[
+\int_{\R^2}|\Psi(\bzeta_\perp,u_\parallel,c)|^2\dd\bzeta_\perp
+-\frac{4\pi u_\parallel^2}{\omega_0^2a^2}\right]\dd u_\parallel
+\nonumber\\
+&=\pi a^2\int_0^\infty
+\big(m(u_\parallel,c)^2-1\big)^2\dd u_\parallel,
+\label{eq:renormalized-point}\\
+\mathcal L_{\rm p}(c)
+&=\int_0^\infty\left[
+\int_{\R^2}|\Psi_{\rm p}(\bzeta_\perp,u_\parallel,c)|^2\dd\bzeta_\perp
+-\frac{4\pi}{\kappa_0^2}\right]\dd u_\parallel
+\nonumber\\
+&=\frac{\pi\kappa_0^2}{\omega_0^2}
+\int_0^\infty u_\parallel^2
+\big(1-m(u_\parallel,c)^{-2}\big)^2\dd u_\parallel.
+\label{eq:renormalized-plane}
+\end{align}
+These are nonnegative extended-real functionals: they may be infinite
+for some trial profiles, but they are zero at $c_0$. They are defined
+as integrals of the displayed nonnegative differences, not as a
+subtraction of two divergent integrals. They describe the reduced
+offset model. Data-based versions replace $\Psi$ by the normalized
+image only where that normalization is reliable.
+
+On any fixed bounded depth-coordinate interval, the original objective
+is finite for bounded smooth profiles and subtracting this
+$c$-independent baseline does not change its minimizers. This is the
+appropriate practical restriction, but it changes the scope of an
+identifiability claim, as explained below.
+
+\subsection{Step 15: prove the idealized uniqueness result}
+
+\begin{proposition}
+In the reduced offset model, let $c_0$ and the admissible profiles $c$
+be smooth, uniformly positive, and bounded on the positive depth axis.
+If the offset profiles are available for all $u_\parallel>0$, then
+each functional \eqref{eq:renormalized-point} and
+\eqref{eq:renormalized-plane} has the unique minimizer $c=c_0$.
+\end{proposition}
+
+\begin{proof}
+At $c=c_0$, \eqref{eq:matched-depths} gives
+$y_{\parallel,c}=z_{\parallel,c}$ and $m=1$, so both functionals are
+zero. Conversely, if either functional vanishes, its nonnegative
+integrand is zero almost everywhere. Continuity then gives
+$m(u_\parallel,c)=1$ for every $u_\parallel>0$.
+
+With $c$ fixed, regard the already defined
+$z_{\parallel,c}$ and $y_{\parallel,c}$ as functions of
+$u_\parallel$. Their defining relations and $m=1$ give
+\begin{equation}
+U_c(z_{\parallel,c})=u_\parallel,\qquad
+U_0(y_{\parallel,c})=u_\parallel,\qquad
+T_0(y_{\parallel,c})=T_c(z_{\parallel,c}).
+\label{eq:uniqueness-identities}
+\end{equation}
+Differentiating the first two identities gives
+\begin{equation}
+\frac{\dd z_{\parallel,c}}{\dd u_\parallel}
+=\frac{1}{c(z_{\parallel,c})},\qquad
+\frac{\dd y_{\parallel,c}}{\dd u_\parallel}
+=\frac{1}{c_0(y_{\parallel,c})}.
+\label{eq:depth-derivatives}
+\end{equation}
+Differentiating the travel-time identity and then using
+\eqref{eq:depth-derivatives} yields
+\begin{equation}
+\frac{1}{c_0(y_{\parallel,c})}
+\frac{\dd y_{\parallel,c}}{\dd u_\parallel}
+=\frac{1}{c(z_{\parallel,c})}
+\frac{\dd z_{\parallel,c}}{\dd u_\parallel}
+\quad\Longrightarrow\quad
+\frac{1}{c_0(y_{\parallel,c})^2}
+=\frac{1}{c(z_{\parallel,c})^2}.
+\end{equation}
+Positivity implies
+\begin{equation}
+c_0(y_{\parallel,c})=c(z_{\parallel,c}),
+\qquad
+\frac{\dd}{\dd u_\parallel}
+\big(y_{\parallel,c}-z_{\parallel,c}\big)=0.
+\end{equation}
+Both depths tend to zero as $u_\parallel\downarrow0$, since
+$T_c(0)=T_0(0)=U_c(0)=U_0(0)=0$. Their constant difference is
+therefore zero:
+\begin{equation}
+y_{\parallel,c}=z_{\parallel,c}.
+\end{equation}
+It follows that $c(z_{\parallel,c})=c_0(z_{\parallel,c})$ for every
+$u_\parallel>0$. Uniform positivity and boundedness ensure that
+$U_c$ maps $[0,\infty)$ onto $[0,\infty)$, so the trial depth covers
+the entire positive axis. Hence $c=c_0$ everywhere, including at zero
+by continuity.
+\end{proof}
+
+\subsection{Step 16: distinguish the ideal theorem from a finite experiment}
+
+The preceding proposition is an identifiability statement for the
+reduced model, not an exact uniqueness theorem for finite-frequency
+Helmholtz data. Its hypotheses use the whole positive depth-coordinate
+axis. The paraxial and high-frequency approximations are applied in
+practice only on an observation window away from the array plane.
+
+If $m=1$ is known only on a connected observation interval, the same
+differentiation shows only that
+$y_{\parallel,c}-z_{\parallel,c}$ is constant there. It need not be
+zero without a depth anchor. A known overlying velocity profile and
+coincident matched depths at the beginning of that interval provide
+such an anchor; then the proof identifies the profile in the covered
+depth interval. A finite window alone does not establish global
+uniqueness among all smooth profiles, and finitely many sampled depths
+do not determine an unrestricted smooth function.
+
+The Gaussian aperture and angular cutoffs have infinite mathematical
+support. Their use above is understood on the effective contributing
+region, where the paraxial hypotheses hold and the omitted tails are
+negligible. Likewise, integrating the Gaussian offset model over all
+$\R^2$ in the ideal objective presumes its significant width lies
+inside that valid region. With finite measured offsets, one uses a
+fixed observed offset domain and states the corresponding restricted
+data assumptions.
+
+For several transverse midpoints, one may additionally average or
+integrate the reliable normalized profiles over the existing domain
+$\mathcal A_\perp$, provided the depth-only background model holds
+throughout the illuminated region. This improves data averaging but
+does not replace missing depth information or a missing depth anchor.
+
+\end{document}
